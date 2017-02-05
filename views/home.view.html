@@ -4,11 +4,11 @@
     <ul ng-repeat="week in newCalendarData track by $index" class="list-unstyled week-data-list">
         <li ng-repeat="(key, value) in week" class="day row">
             <div class="col-md-2 date-wr">
-                {{key | date:'EEE dd/MM/yyyy'}}
+                {{::key | date:'EEE dd/MM/yyyy'}}
             </div>
             <div class="col-md-10">
                 <div ng-repeat="(key1, value1) in value" class="activity" ng-click="GetEventDetails(value1[0])">
-                    {{value1[2]}}
+                    {{::value1[2]}}
                 </div>
             </div>
         </li>
