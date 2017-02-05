@@ -1,0 +1,92 @@
+.alert-wr {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    width: 300px;
+    z-index: 9999;
+}
+
+.spacer {
+    margin-top: 120px;
+}
+
+.small-spacer {
+    margin-bottom: 50px;
+}
+
+.main-nav {
+    a {
+        color: #fff !important;
+    }
+    //height: 50px;
+    background-color: #0ec580;
+    .navbar-right {
+        //background-color: #538e77;
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: #479879;
+        }
+    }
+}
+
+.logo {
+    width: 70px;
+    height: 40px;
+    background-image: url(../img/calendar-and-user-white.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.btn-primary {
+    background-color: #0ec580;
+}
+
+.title {
+    color: #ff4929;
+}
+
+.week-data-list {
+    color: #ff4929;
+}
+
+.date-wr {
+    line-height: 50px;
+}
+
+.day {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.activity {
+    padding: 10px;
+    margin-right: 5px;
+    display: inline-block;
+    background-color: #ff4929;
+    color: #fff;
+    margin: 5px;
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #7d443a;
+    }
+}
+
+.event-table {
+    background-color: #f5f5f5;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+    /* iPhone 6 Portrait */
+    .activity {
+        display: block;
+        padding: 6px;
+    }
+}

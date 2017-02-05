@@ -1,0 +1,29 @@
+<div class="col-md-12 spacer">
+    <h1 class="small-spacer title">Event</h1>
+    
+    <table class="table table-bordered event-table">
+
+        <tbody>
+            <tr>
+                <td>id</td>
+                <td>{{id}}</td>
+            </tr>
+            <tr>
+                <td>id_user</td>
+                <td>{{id_user}}</td>
+            </tr>
+            <tr>
+                <td>data-duration</td>
+                <td>{{duration}}</td>
+            </tr>
+            <tr>
+                <td>data-description</td>
+                <td><div ng-bind-html="description"></div></td>
+            </tr>
+            <tr>
+                <td>data-event_type</td>
+                <td>{{event_type}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

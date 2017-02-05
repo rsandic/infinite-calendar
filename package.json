@@ -1,0 +1,31 @@
+{
+  "name": "manageusers",
+  "version": "1.0.0",
+  "description": "kompajliranje_less_fajlova",
+  "main": "index.js",
+  "scripts": {
+    "test": "less"
+  },
+  "author": "Radovan Sandic",
+  "license": "ISC",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "^1.2.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-codekit": "^1.1.0",
+    "grunt-contrib-cssmin": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/rsandic/infinite-calendar.git"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "homepage": "https://bitbucket.org/rsandic/infinite-calendar#readme"
+}
