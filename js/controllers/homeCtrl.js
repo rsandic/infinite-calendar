@@ -10,17 +10,18 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "AUTH_EVENTS"
         $scope.direction = 0; //init state
 
         $scope.GetCalendarData = function() {
-            // CalendarServices.GetCalendarData($scope.year, $scope.week, $scope.direction)
-            //     .then(function(response) {
-            //         console.log(JSON.stringify(response));
-            //         $scope.calendarData = response.data.calendar.events;
-            //         console.log($scope.calendarData);
-            //     });
-            $http.get('responses/calendar.json').success(function(data) {
-                //console.log(data);
-                $scope.calendarData = data.calendar.events;
-                $scope.ArangeCalendarData($scope.calendarData);
-            });
+            CalendarServices
+                .GetCalendarData($scope.year, $scope.week, $scope.direction)
+                .then(function(response) {
+                    //console.log(JSON.stringify(response));
+                    $scope.calendarData = response.data.calendar.events;
+                    $scope.ArangeCalendarData($scope.calendarData);
+                });
+            // $http.get('responses/calendar.json').success(function(data) {
+            //     //console.log(data);
+            //     $scope.calendarData = data.calendar.events;
+            //     $scope.ArangeCalendarData($scope.calendarData);
+            // });
         }
 
         $scope.ArangeCalendarData = function(data) {

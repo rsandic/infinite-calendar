@@ -29,12 +29,10 @@ app.factory('CalendarServices', function($rootScope, $http) {
             });
     }
 
-    http://staging-api.avalonactive.com/avl/event?id_event=e00000V8lHuxcit7
-
     factory.GetEventDetails = function(eventId) {
         return $http.get('http://staging-api.avalonactive.com/avl/event', {
                 params: {
-                    id_event : eventId
+                    id_event: eventId
                 }
 
             })

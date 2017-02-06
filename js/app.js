@@ -62,8 +62,6 @@ app.run(['$rootScope', '$location', 'localStorageService', function($rootScope, 
     $rootScope.$on("$locationChangeStart", function(event, next, current) {
         if (localStorageService.get("token") == '' || localStorageService.get("token") == null) {
             $location.path("login");
-        } else {
-            $location.path("home");
         }
 
     })
