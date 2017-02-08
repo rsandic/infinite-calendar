@@ -1,7 +1,8 @@
 var app = angular.module("Calendar", [
     'ui.router',
     'LocalStorageModule',
-    'lsalert'
+    'lsalert',
+    'CalendarData'
 ]);
 
 //-------------------------------------------------
@@ -64,5 +65,6 @@ app.run(['$rootScope', '$location', 'localStorageService', function($rootScope, 
             $location.path("login");
         }
 
-    })
+    });
 }]);
+

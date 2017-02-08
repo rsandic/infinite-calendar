@@ -1,0 +1,14 @@
+<div class="col-md-12 " id="calendarDataWr">
+    <ul ng-repeat="week in calendarData track by $index" class="list-unstyled week-data-list">
+        <li ng-repeat="(key, value) in week" class="day row">
+            <div class="col-md-2 date-wr" id="{{key}}">
+                {{::key | date:'EEE dd/MM/yyyy'}}
+            </div>
+            <div class="col-md-10">
+                <a ng-repeat="(key1, value1) in value" class="activity" ng-href="#/event/{{value1[0]}}">
+                    {{::value1[2]}}
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

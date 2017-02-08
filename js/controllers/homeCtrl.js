@@ -1,5 +1,6 @@
-app.controller('HomeController', ["$rootScope", "$scope", "$http", "AUTH_EVENTS", '$state', 'localStorageService', '$filter', 'CalendarServices',
-    function($rootScope, $scope, $http, AUTH_EVENTS, $state, localStorageService, $filter, CalendarServices) {
+app.controller('HomeController', ["$rootScope", "$window", "$location", "$anchorScroll", "$scope", "$http", "AUTH_EVENTS", '$state', 'localStorageService', '$filter', 'CalendarServices',
+    function($rootScope, $window, $location, $anchorScroll, $scope, $http, AUTH_EVENTS, $state, localStorageService, $filter, CalendarServices) {
+
         //today date
         $scope.currentDate = new Date();
         $scope.newCalendarData = {};
@@ -9,9 +10,9 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "AUTH_EVENTS"
         $scope.year = $filter('date')($scope.currentDate, "yyyy");
         $scope.direction = 0; //init state
 
-        $scope.GetCalendarData = function() {
+        $scope.GetCalendarData = function(year, week, direction) {
             CalendarServices
-                .GetCalendarData($scope.year, $scope.week, $scope.direction)
+                .GetCalendarData(year, week, direction)
                 .then(function(response) {
                     //console.log(JSON.stringify(response));
                     $scope.calendarData = response.data.calendar.events;
@@ -48,10 +49,11 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "AUTH_EVENTS"
                         }
                     });
                 });
+
             });
 
-            //console.log($scope.newCalendarData);
         }
+
 
         function DateTimeToString(objDate) {
             return objDate.getFullYear() + '-' + (((objDate.getMonth() + 1) < 10) ? '0' : '') + (objDate.getMonth() + 1) + '-' + ((objDate.getDate() < 10) ? '0' : '') + objDate.getDate();
@@ -96,7 +98,23 @@ app.controller('HomeController', ["$rootScope", "$scope", "$http", "AUTH_EVENTS"
 
         }
 
-        $scope.GetCalendarData();
+        //proveriti da li ce trebati
+        //when ng-repet finish set
+        $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+            $anchorScroll("2017-03-02");
+        });
+
+        $scope.GetMoreData = function(time) {
+            console.log("Jos podataka", time);
+            if (time == 'new') {
+
+            } else if (time == 'old') {
+
+
+            }
+        }
+
+        $scope.GetCalendarData($scope.year, $scope.week, $scope.direction);
 
     }
 ]);

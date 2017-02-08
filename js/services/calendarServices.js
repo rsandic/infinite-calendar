@@ -20,7 +20,7 @@ app.factory('CalendarServices', function($rootScope, $http) {
                 params: {
                     year: year,
                     week: week,
-                    direction: 0
+                    direction: direction
                 }
 
             })

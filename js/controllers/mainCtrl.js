@@ -29,7 +29,7 @@ app.controller('MainCtroller', ["$rootScope", "$scope", "AUTH_EVENTS", "AlertSer
             $scope.showNotification('danger', 'Login failed.');
         });
 
-        
+         $rootScope.currentPositionOfScroll = 800; //init scroll position
         //logout function
         $scope.Logout = function() {
             console.log("Logout");

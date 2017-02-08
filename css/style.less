@@ -49,6 +49,7 @@
 
 .week-data-list {
     color: #ff4929;
+    width: 95%;
 }
 
 .date-wr {
@@ -76,11 +77,19 @@
     &:active,
     &:focus {
         background-color: #7d443a;
+        text-decoration: none;
     }
 }
 
 .event-table {
     background-color: #f5f5f5;
+}
+
+#calendarDataWr {
+    margin-bottom: 50px;
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
