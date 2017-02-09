@@ -9,16 +9,17 @@ angular.module('CalendarData', [])
         scope: {
             calendarData: "=",
             addCalendarNewData :"&",
-            currentPositionOfScroll : "=" 
+            currentScrollPosition : "=" 
         },
         link: function(scope, element, attrs) {
-            console.log(element);
-            var raw = element[0];
-            raw.scrollTop = 500;
+            var raw = element[0]; 
+            if(scope.currentScrollPosition == null){
+                //if user just loaded dataq scroll position will be null
+                //then set sroll on the middle - today date
+                scope.currentScrollPosition = 500;
+            }
             element.bind('scroll', function() { 
-                console.log(scope.currentPositionOfScroll);
-                //memory for current position of scope
-                scope.currentPositionOfScroll = raw.scrollTop + raw.offsetHeight;               
+                //memory for current position of scope              
                 if(raw.scrollTop == 0){
                      scope.addCalendarNewData({"time" : "old"});
                 } 
@@ -27,10 +28,12 @@ angular.module('CalendarData', [])
                     scope.addCalendarNewData({"time" : "new"});
                 }
 
+                scope.currentScrollPosition = raw.scrollTop + raw.offsetHeight;
             });
 
+                  
             //need to set current date with scroll
-            element.animate({scrollTop: scope.currentPositionOfScroll}, "fast");
+            element.animate({scrollTop: scope.currentScrollPosition}, "fast");
 
         }
     };

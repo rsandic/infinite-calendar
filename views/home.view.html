@@ -1,20 +1,5 @@
 <div class="col-md-12 spacer" style="margin-bottom:50px">
     <h1 class="text-center small-spacer title">Calendar Data</h1>
-    <!-- <ul ng-repeat="week in newCalendarData track by $index" on-finish-render="ngRepeatFinished" class="list-unstyled week-data-list">
-        <li ng-repeat="(key, value) in week" class="day row">
-            <div class="col-md-2 date-wr" id="{{key}}">
-                {{::key | date:'EEE dd/MM/yyyy'}}
-            </div>
-            <div class="col-md-10">
-                <div ng-repeat="(key1, value1) in value" class="activity" ng-click="GetEventDetails(value1[0])">
-                    {{::value1[2]}}
-                </div>
-            </div>
-        </li>
-    </ul> -->
-    <calendar-directive calendar-data="newCalendarData"
-                        add-calendar-new-data="GetMoreData(time)"
-                        current-position-of-scroll = "currentPositionOfScroll">
+    <calendar-directive calendar-data="newCalendarData" add-calendar-new-data="GetMoreData(time)" current-scroll-position="currentPositionOfScroll">
     </calendar-directive>
 </div>
-<!-- <calendar-directive calendar-data="newCalendarData"></calendar-directive> -->

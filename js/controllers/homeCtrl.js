@@ -1,57 +1,58 @@
 app.controller('HomeController', ["$rootScope", "$window", "$location", "$anchorScroll", "$scope", "$http", "AUTH_EVENTS", '$state', 'localStorageService', '$filter', 'CalendarServices',
     function($rootScope, $window, $location, $anchorScroll, $scope, $http, AUTH_EVENTS, $state, localStorageService, $filter, CalendarServices) {
-
         //today date
         $scope.currentDate = new Date();
-        $scope.newCalendarData = {};
+        //$scope.newCalendarData = [];
         $rootScope.logOutShow = true;
-        //get week number
-        $scope.week = $filter('date')($scope.currentDate, "ww");
-        $scope.year = $filter('date')($scope.currentDate, "yyyy");
-        $scope.direction = 0; //init state
+
 
         $scope.GetCalendarData = function(year, week, direction) {
             CalendarServices
                 .GetCalendarData(year, week, direction)
                 .then(function(response) {
-                    //console.log(JSON.stringify(response));
                     $scope.calendarData = response.data.calendar.events;
-                    $scope.ArangeCalendarData($scope.calendarData);
+                    var endTime = response.data.calendar.end_week
+                        //year must be added here
+                        //if init state or new data
+                    if (direction == 0 || direction == 1) {
+                        //storing last week 
+                        $rootScope.endWeek = endTime.substr(endTime.length - 2);
+                        $scope.newCalendarData.push($scope.ArangeCalendarData($scope.calendarData));
+                    } else if (direction == -1) {
+                        var week = response.data.calendar.start_week;
+                        //storing new first week, wheen user add new data start changes
+                        $rootScope.week = week.substr(week.length - 2);
+                        $scope.newCalendarData.unshift($scope.ArangeCalendarData($scope.calendarData));
+                    }
+
                 });
-            // $http.get('responses/calendar.json').success(function(data) {
-            //     //console.log(data);
-            //     $scope.calendarData = data.calendar.events;
-            //     $scope.ArangeCalendarData($scope.calendarData);
-            // });
         }
 
         $scope.ArangeCalendarData = function(data) {
+            var dataArray = {};
             angular.forEach(data, function(value, key) {
                 var weekNumber = key.substr(key.length - 2); //get week number
                 var year = key.substr(0, 4); //get year number
-                //$scope.newCalendarData[key] = $scope.GetDaysInWeek(year, weekNumber);
                 var daysInWeek = $scope.GetDaysInWeek(year, weekNumber);
-                //prepakovati podatke za svaki datum
-                $scope.newCalendarData[key] = {};
                 angular.forEach(daysInWeek, function(value1, key1) {
                     var keepGoing = true; //when find vale for date break the for each loop
                     angular.forEach(value, function(value2, key2) {
                         if (keepGoing) {
                             if (value1 == key2) {
-                                $scope.newCalendarData[key][value1] = value2;
+                                dataArray[value1] = value2;
                                 keepGoing = false;
                             } else {
                                 var tmpArray = [];
-                                $scope.newCalendarData[key][value1] = [];
+                                dataArray[value1] = [];
                                 tmpArray[2] = "No Data";
-                                $scope.newCalendarData[key][value1][0] = tmpArray;
+                                dataArray[value1][0] = tmpArray;
                             }
                         }
                     });
                 });
 
             });
-
+            return dataArray;
         }
 
 
@@ -98,23 +99,29 @@ app.controller('HomeController', ["$rootScope", "$window", "$location", "$anchor
 
         }
 
-        //proveriti da li ce trebati
-        //when ng-repet finish set
-        $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-            $anchorScroll("2017-03-02");
+        //remember sroll position
+        $scope.$watch('currentPositionOfScroll', function(newValue, oldValue) {
+            $rootScope.currentPositionOfScroll = newValue;
         });
 
         $scope.GetMoreData = function(time) {
-            console.log("Jos podataka", time);
+            console.log("More data", time);
             if (time == 'new') {
-
+                $scope.GetCalendarData($rootScope.year, $rootScope.endWeek, 1);
             } else if (time == 'old') {
-
-
+                $scope.GetCalendarData($rootScope.year, $rootScope.week, -1);
             }
         }
 
-        $scope.GetCalendarData($scope.year, $scope.week, $scope.direction);
+        //if we have array of data in root scope we know tahat user is been here
+        if ($scope.newCalendarData.length == 0) {
+            //get week number
+            $rootScope.week = $filter('date')($scope.currentDate, "ww");
+            $rootScope.year = $filter('date')($scope.currentDate, "yyyy");
+            
+            $scope.GetCalendarData($rootScope.year, $rootScope.week, 0);
+        }
+
 
     }
 ]);

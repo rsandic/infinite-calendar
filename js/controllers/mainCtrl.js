@@ -19,17 +19,24 @@ app.controller('MainCtroller', ["$rootScope", "$scope", "AUTH_EVENTS", "AlertSer
             $scope.showNotification('success', 'You are logged in.');
         });
 
-        $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event, args){
-        	AlertService.alertsShow = true;
+        $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event, args) {
+            AlertService.alertsShow = true;
             $scope.showNotification('danger', 'You are logged out.');
         });
 
-        $rootScope.$on(AUTH_EVENTS.loginFailed, function(event, args){
-        	AlertService.alertsShow = true;
+        $rootScope.$on(AUTH_EVENTS.loginFailed, function(event, args) {
+            AlertService.alertsShow = true;
             $scope.showNotification('danger', 'Login failed.');
         });
-
-         $rootScope.currentPositionOfScroll = 800; //init scroll position
+        
+        
+        //storing these values in root scope because we dont to load data always
+        $rootScope.newCalendarData = [];
+        $rootScope.currentPositionOfScroll = null; //init scroll position
+        $rootScope.endWeek = null; //init scroll position
+        $rootScope.year = null;
+        $rootScope.week = null;
+        
         //logout function
         $scope.Logout = function() {
             console.log("Logout");
